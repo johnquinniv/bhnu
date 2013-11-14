@@ -1,0 +1,9 @@
+library (unmarked)
+setwd("")
+bhnu <- csvToUMF("unmarked with year.csv", long = FALSE, type = "unmarkedFramePCount")    # type may need to change for occupancy
+summary(bhnu)
+
+# it may be necessary to scale the covariates
+#obsCovs(bhnu)= scale (obsCovs(bhnu))
+
+fm1.bhnu <- pcount(~ Date ~Tree+ Shrub, bhnu)
