@@ -7,3 +7,4 @@ summary(bhnu)
 #obsCovs(bhnu)= scale (obsCovs(bhnu))
 
 fm1.bhnu <- pcount(~ Date ~Tree+ Shrub, bhnu)
+dddf
