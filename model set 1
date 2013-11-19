@@ -6,5 +6,22 @@ summary(bhnu)
 # it may be necessary to scale the covariates
 #obsCovs(bhnu)= scale (obsCovs(bhnu))
 
-fm1.bhnu <- pcount(~ Date ~Tree+ Shrub, bhnu)
-dddf
+fmnull.bhnu <- pcount(~1 ~1, bhnu)
+fmglobal.bhnu <- pcount(~ Noise + Wind + Sky ~ CanopyHt + CanopyCvr + TreeBA +TreeDensity +PineBA +PineDensity, bhnu)
+fm1.bhnu <- pcount(~1 ~CanopyHt, bhnu)
+fm2.bhnu <- pcount(~1, ~TreeDensity, bhnu)
+fm3.bhnu <- pcount(~1, ~TreeBA, bhnu)
+fm4.bhnu <- pcount(~1, ~PineBA, bhnu)
+fm5.bhnu <- pcount(~1, ~PineDensity, bhnu)
+fm6.bhnu <- pcount(~1, ~CanopyCvr, bhnu)
+fm7.bhnu <- pcount(~1, 
+
+
+summary(fmnull.bhnu)
+summary(fmglobal.bhnu)
+summary(fm1.bhnu)
+
+
+
+
+AIC(fmnull.bhnu, fmglobal.bhnu, fm1.bhnu)
