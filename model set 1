@@ -7,15 +7,29 @@ summary(bhnu)
 #obsCovs(bhnu)= scale (obsCovs(bhnu))
 
 fmnull.bhnu <- pcount(~1 ~1, bhnu)
-fmglobal.bhnu <- pcount(~ Noise + Wind + Sky ~ CanopyHt + CanopyCvr + TreeBA +TreeDensity +PineBA +PineDensity, bhnu)
+fmglobal.bhnu <- pcount(~ Noise + Wind + Sky ~ CanopyHt + CanopyCvr + TreeBA +TreeDensity +PineBA +PineDensity +Area +PercPine +System, bhnu)
 fm1.bhnu <- pcount(~1 ~CanopyHt, bhnu)
 fm2.bhnu <- pcount(~1, ~TreeDensity, bhnu)
 fm3.bhnu <- pcount(~1, ~TreeBA, bhnu)
 fm4.bhnu <- pcount(~1, ~PineBA, bhnu)
 fm5.bhnu <- pcount(~1, ~PineDensity, bhnu)
 fm6.bhnu <- pcount(~1, ~CanopyCvr, bhnu)
-fm7.bhnu <- pcount(~1, 
-
+## Cornell page: tendency to find them in highest canopy and in mature pine stands (perhaps = high-quality patch)
+fm7.bhnu <- pcount(~1, ~CanopyHt + PineBA, bhnu)
+## Same as fm7 except if simply a mature stand in general, with good pine density, is important:
+fm8.bhnu <- pcount(~1, ~CanopyHt + TreeBA + PineDensity, bhnu)
+## Tend to forage in more open canopy and less dense trees. maybe we detected them while foraging
+fm9.bhnu <- pcount(~1, ~CanopyCvr + TreeDensity, bhnu)
+## If the canopy structure is the most important because these are high-nesting birds
+fm10.bhnu <- pcount(~1, ~CanopyCvr + CanopyHt, bhnu)
+## But perhaps the system truly is most important. Quality of the matrix would be reflected in system & %pine
+fm11.bhnu <- pcount(~1, ~System + PercPine, bhnu)
+# Best guess at suitable habitat based on where found them:
+fm12.bhnu <- pcount(~1, ~PineBA + CanopyCvr + PercPine, bhnu)
+# The real extent of the patch--area and volume of pine
+fm13.bhnu <- pcount(~1, ~Area + PineBA, bhnu)
+# robust stands--both large and mature
+fm14.bhnu <- pcount(~1, ~Area + CanopyHt + CanopyCvr + PineBA, bhnu)
 
 summary(fmnull.bhnu)
 summary(fmglobal.bhnu)
